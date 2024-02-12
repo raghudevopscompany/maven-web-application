@@ -97,13 +97,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://172.31.45.41:9980/mithuntechnologies/repository/facebook-releases/</url>
+	      <url>http://13.233.142.97:8081/repository/citibank-release-jenkins/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://172.31.45.41:9980/mithuntechnologies/repository/facebook-snapshot/</url>
+	      <url>http://13.233.142.97:8081/repository/citibank-snapshot-jenkins/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>

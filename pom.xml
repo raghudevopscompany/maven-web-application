@@ -97,13 +97,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://172.31.46.196:8081/repository/citibank-release-jenkins/</url>
+	      <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://172.31.46.196:8081/repository/citibank-snapshot-jenkins/</url>
+	      <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>

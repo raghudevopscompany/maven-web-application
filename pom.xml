@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.mt</groupId>
-	<artifactId>MavenWebApplication-${JOB_NAME}-${BUILD_NUMBER}</artifactId>
+	<artifactId>${project.artifactId}-${BUILD_NUMBER}-${timestamp}</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	

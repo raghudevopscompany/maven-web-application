@@ -3,22 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.mt</groupId>
-	<build>
-    <plugins>
-        <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <configuration>
-                <finalName>${project.artifactId}-${buildNumber}-${timestamp}</finalName>
-            </configuration>
-        </plugin>
-        <plugin>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <configuration>
-                <file>${project.build.directory}/${project.artifactId}-${buildNumber}-${timestamp}.${project.packaging}</file>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+	<artifactId>maven-web-application</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.mt</groupId>
-	<artifactId>maven-web-application</artifactId>
+	<artifactId>${project.artifactId}-${buildNumber}-${timestamp}</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	
@@ -25,6 +25,8 @@
 		<sonar.login>squ_02e108e69a4ce9cf437350c4bb0d76d7480ebf82</sonar.login>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		    <buildNumber>${env.BUILD_NUMBER}</buildNumber>
+    <timestamp></timestamp>
 
 	</properties>
 

@@ -6,9 +6,9 @@
 	<artifactId>maven-web-application</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	   <properties>
+	  
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
-    </properties>
+  
 	
 	<name>maven-web-application</name>
 

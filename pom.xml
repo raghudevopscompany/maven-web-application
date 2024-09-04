@@ -127,12 +127,11 @@
                         <goals>
                             <goal>create</goal>
                         </goals>
-                        <configuration>
-                            <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
-                            <buildNumber>${build.number}</buildNumber>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <buildNumber>${build.number}</buildNumber>
+                </configuration>
             </plugin>
 
             <!-- Compiler Plugin -->

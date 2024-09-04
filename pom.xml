@@ -26,6 +26,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+        <build.number>unknown</build.number>
     </properties>
 
     <dependencies>
@@ -103,7 +104,7 @@
     </distributionManagement>
     
     <build>
-        <finalName>maven-web-application-${maven.build.timestamp}</finalName>
+        <finalName>maven-web-application-${maven.build.timestamp}-${build.number}</finalName>
         
         <plugins>
             <plugin>

@@ -1,14 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <groupId>com.mt</groupId>
     <artifactId>maven-web-application</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    
-    <name>maven-web-application</name>
 
+    <name>maven-web-application</name>
     <description>Maven Web Project for Java Project</description>
 
     <organization>
@@ -26,16 +25,7 @@
         <sonar.password>passw0rd</sonar.password>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <build.timestamp>${build.timestamp}</build.timestamp>
-        <build.number>${build.number}</build.number>
     </properties>
-
-    <scm>
-        <connection>scm:git:git://your-repository-url</connection>
-        <developerConnection>scm:git:ssh://your-repository-url</developerConnection>
-        <url>http://your-repository-url</url>
-        <tag>HEAD</tag>
-    </scm>
 
     <dependencies>
         <dependency>
@@ -43,20 +33,22 @@
             <artifactId>json</artifactId>
             <version>20160212</version>
         </dependency>
-        
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -86,30 +78,29 @@
             <version>${spring.version}</version>
         </dependency>
     </dependencies>
-    
+
     <distributionManagement>
         <repository>
             <id>nexus</id>
             <name>Mithun Technologies Releases Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</url>
         </repository>
-        
         <snapshotRepository>
             <id>nexus</id>
             <name>Mithun Technologies Snapshot Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
-    
+
     <build>
-        <finalName>${project.artifactId}-${build.timestamp}-${build.number}</finalName>
-        
+        <finalName>maven-web-application</finalName>
+
         <plugins>
             <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.1</version>
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
@@ -120,7 +111,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.44.v20210927</version>
+                <version>11.0.13</version>
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
@@ -133,47 +124,7 @@
             <plugin>
                 <groupId>org.eclipse</groupId>
                 <artifactId>m2e-core</artifactId>
-                <version>1.18.1</version>
-            </plugin>
-
-            <!-- Build Number Plugin -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>create-build-number</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                        <configuration>
-                            <timestampFormat>yyyyMMdd</timestampFormat>
-                            <buildNumberProperty>build.number</buildNumberProperty>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            <!-- Build Helper Plugin -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <id>add-properties</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>timestamp-property</goal>
-                        </goals>
-                        <configuration>
-                            <timestampFormat>yyyy-MM-dd</timestampFormat>
-                            <timestampProperty>build.timestamp</timestampProperty>
-                        </configuration>
-                    </execution>
-                </executions>
+                <version>1.20.0</version>
             </plugin>
         </plugins>
     </build>

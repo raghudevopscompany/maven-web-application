@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
@@ -9,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     
     <name>maven-web-application</name>
+
     <description>Maven Web Project for Java Project</description>
 
     <organization>
@@ -21,13 +21,11 @@
         <spring.version>5.1.2.RELEASE</spring.version>
         <junit.version>4.11</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <sonar.host.url>http://18.138.81.149:9000/</sonar.host.url>
-        <sonar.login>admin</sonar.login>
-        <sonar.password>passw0rd</sonar.password>
+        <sonar.host.url>http://172.31.34.233:9000/</sonar.host.url>
+        <sonar.login>squ_02e108e69a4ce9cf437350c4bb0d76d7480ebf82</sonar.login>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
-        <build.number>unknown</build.number>
+        <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -37,26 +35,29 @@
             <version>20160212</version>
         </dependency>
         
-        <!-- Test dependencies -->
+        <!-- test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-        <!-- Compile dependencies -->
+
+        <!-- compile dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -77,46 +78,34 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        
+        <!-- provided dependencies -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     
     <distributionManagement>
         <repository>
-            <id>nexus-release</id>
+            <id>nexus</id>
             <name>Mithun Technologies Releases Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</url>
         </repository>
+        
         <snapshotRepository>
-            <id>nexus-snapshot</id>
+            <id>nexus</id>
             <name>Mithun Technologies Snapshot Nexus Repository</name>
-            <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url> <!-- Using the same URL as release -->
+            <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
-
+    
     <build>
-        <finalName>${project.artifactId}-${maven.build.timestamp}-${build.number}</finalName>
+        <finalName>maven-web-application</finalName>
         
         <plugins>
-            <!-- Build Number Plugin -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>create-build-number</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
-                    <buildNumber>${build.number}</buildNumber>
-                </configuration>
-            </plugin>
-
-            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -127,7 +116,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Jetty Plugin -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -140,20 +128,15 @@
                 </configuration>
             </plugin>
 
-            <!-- Eclipse Plugin -->
-            <plugin>
-                <groupId>org.eclipse</groupId>
-                <artifactId>m2e-core</artifactId>
-                <version>1.20.0</version>
-            </plugin>
-            
-            <!-- Deploy Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.1.0-M1</version>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
                 <configuration>
-                    <altDeploymentRepository>nexus-release::default::http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</altDeploymentRepository>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <wtpversion>2.0</wtpversion>
+                    <wtpContextName>maven-web-application</wtpContextName>
                 </configuration>
             </plugin>
         </plugins>

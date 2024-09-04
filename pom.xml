@@ -25,8 +25,7 @@
         <sonar.login>squ_02e108e69a4ce9cf437350c4bb0d76d7480ebf82</sonar.login>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format> <!-- Updated format to avoid colons in filename -->
-        <build.timestamp>${maven.build.timestamp.format}</build.timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd-HHmmss</maven.build.timestamp.format> <!-- Updated format to avoid colons in filenames -->
     </properties>
 
     <dependencies>
@@ -48,9 +47,28 @@
     </distributionManagement>
     
     <build>
-        <finalName>${project.artifactId}-${project.version}-${build.timestamp}</finalName>
-        
         <plugins>
+            <!-- Plugin to generate the timestamp -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>add-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp</goal>
+                        </goals>
+                        <configuration>
+                            <format>${maven.build.timestamp.format}</format>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <outputFile>timestamp.txt</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -85,7 +103,10 @@
                 </configuration>
             </plugin>
 
-            <!-- Optionally add maven-assembly-plugin or other plugins if needed -->
+            <!-- Additional plugins can be added here -->
         </plugins>
+        
+        <!-- Use the build-helper-maven-plugin to update the final name dynamically -->
+        <finalName>${project.artifactId}-${project.version}-${build.timestamp}</finalName>
     </build>
 </project>

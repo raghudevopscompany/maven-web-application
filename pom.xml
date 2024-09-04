@@ -117,7 +117,7 @@
                 </configuration>
             </plugin>
 
-            <plugins>
+            
             <!-- Build Number Plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

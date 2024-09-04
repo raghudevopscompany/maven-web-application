@@ -26,8 +26,8 @@
         <sonar.password>passw0rd</sonar.password>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <build.timestamp>${maven.build.timestamp}</build.timestamp>
-        <build.number>${maven.build.number}</build.number>
+        <build.timestamp>${build.timestamp}</build.timestamp>
+        <build.number>${build.number}</build.number>
     </properties>
 
     <dependencies>
@@ -149,8 +149,8 @@
                         </goals>
                         <configuration>
                             <timestampFormat>yyyyMMdd</timestampFormat>
-                            <buildNumberProperty>maven.build.number</buildNumberProperty>
-                            <timestampProperty>maven.build.timestamp</timestampProperty>
+                            <buildNumberProperty>build.number</buildNumberProperty>
+                            <!-- Only include the build number if supported -->
                         </configuration>
                     </execution>
                 </executions>
@@ -170,7 +170,7 @@
                         </goals>
                         <configuration>
                             <timestampFormat>yyyy-MM-dd</timestampFormat>
-                            <timestampProperty>maven.build.timestamp</timestampProperty>
+                            <timestampProperty>build.timestamp</timestampProperty>
                         </configuration>
                     </execution>
                 </executions>

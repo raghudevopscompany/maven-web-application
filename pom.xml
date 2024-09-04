@@ -23,9 +23,11 @@
         <log4j.version>1.2.17</log4j.version>
         <sonar.host.url>http://18.138.81.149:9000/</sonar.host.url>
         <sonar.login>admin</sonar.login>
-        <sonar.password>passw0rd</sonar.password> 
+        <sonar.password>passw0rd</sonar.password>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+        <build.number>${maven.build.number}</build.number>
     </properties>
 
     <dependencies>
@@ -147,7 +149,8 @@
                         </goals>
                         <configuration>
                             <timestampFormat>yyyyMMdd</timestampFormat>
-                            <buildNumberProperty>build.number</buildNumberProperty>
+                            <buildNumberProperty>maven.build.number</buildNumberProperty>
+                            <timestampProperty>maven.build.timestamp</timestampProperty>
                         </configuration>
                     </execution>
                 </executions>
@@ -167,7 +170,7 @@
                         </goals>
                         <configuration>
                             <timestampFormat>yyyy-MM-dd</timestampFormat>
-                            <timestampProperty>build.timestamp</timestampProperty>
+                            <timestampProperty>maven.build.timestamp</timestampProperty>
                         </configuration>
                     </execution>
                 </executions>

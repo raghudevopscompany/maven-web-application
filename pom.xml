@@ -105,7 +105,7 @@
                         <id>add-timestamp-property</id>
                         <phase>initialize</phase>
                         <goals>
-                            <goal>timestamp</goal>
+                            <goal>timestamp-property</goal>
                         </goals>
                         <configuration>
                             <timestampFormat>${maven.build.timestamp.format}</timestampFormat>

@@ -9,7 +9,6 @@
     <version>0.0.1-SNAPSHOT</version>
     
     <name>maven-web-application</name>
-
     <description>Maven Web Project for Java Project</description>
 
     <organization>
@@ -45,21 +44,18 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Compile dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -89,11 +85,10 @@
             <name>Mithun Technologies Releases Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</url>
         </repository>
-        
         <snapshotRepository>
             <id>nexus-snapshot</id>
             <name>Mithun Technologies Snapshot Nexus Repository</name>
-            <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url>
+            <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url> <!-- Using the same URL as release -->
         </snapshotRepository>
     </distributionManagement>
 
@@ -101,26 +96,6 @@
         <finalName>${project.artifactId}-${maven.build.timestamp}-${build.number}</finalName>
         
         <plugins>
-            <!-- Build Helper Plugin to add timestamp -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <id>add-timestamp-property</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>timestamp-property</goal>
-                        </goals>
-                        <configuration>
-                            <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
-                            <timestampProperty>maven.build.timestamp</timestampProperty>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- Build Number Plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -136,6 +111,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
                     <buildNumber>${build.number}</buildNumber>
                 </configuration>
             </plugin>
@@ -177,7 +153,7 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>3.1.0-M1</version>
                 <configuration>
-                    <altDeploymentRepository>nexus-releases::default::http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</altDeploymentRepository>
+                    <altDeploymentRepository>nexus-release::default::http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</altDeploymentRepository>
                 </configuration>
             </plugin>
         </plugins>

@@ -21,11 +21,11 @@
         <spring.version>5.1.2.RELEASE</spring.version>
         <junit.version>4.11</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <sonar.host.url>http://172.31.34.233:9000/</sonar.host.url>
-        <sonar.login>squ_02e108e69a4ce9cf437350c4bb0d76d7480ebf82</sonar.login>
+        <sonar.host.url>http://18.138.81.149:9000/</sonar.host.url>
+        <sonar.login>admin</sonar.login>
+        <sonar.password>passw0rd</sonar.password> 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -35,21 +35,19 @@
             <version>20160212</version>
         </dependency>
         
-        <!-- test dependencies -->
+        <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -57,7 +55,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- compile dependencies -->
+        <!-- Compile dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -78,14 +76,6 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        
-        <!-- provided dependencies -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
     
     <distributionManagement>
@@ -103,9 +93,10 @@
     </distributionManagement>
     
     <build>
-        <finalName>maven-web-application</finalName>
+        <finalName>${project.artifactId}-${build.timestamp}-${build.number}</finalName>
         
         <plugins>
+            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -116,6 +107,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Jetty Plugin -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -128,6 +120,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Eclipse Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -138,6 +131,46 @@
                     <wtpversion>2.0</wtpversion>
                     <wtpContextName>maven-web-application</wtpContextName>
                 </configuration>
+            </plugin>
+
+            <!-- Build Number Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>create-build-number</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                        <configuration>
+                            <timestampFormat>yyyyMMdd</timestampFormat>
+                            <buildNumberProperty>build.number</buildNumberProperty>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- Build Helper Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>add-properties</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <timestampFormat>yyyy-MM-dd</timestampFormat>
+                            <timestampProperty>build.timestamp</timestampProperty>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

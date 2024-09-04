@@ -103,7 +103,7 @@
     </distributionManagement>
     
     <build>
-        <finalName>maven-web-application</finalName>
+        <finalName>maven-web-application-${maven.build.timestamp}</finalName>
         
         <plugins>
             <plugin>

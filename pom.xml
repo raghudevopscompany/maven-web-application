@@ -38,11 +38,67 @@
     </scm>
 
     <dependencies>
-        <!-- dependencies as defined previously -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
+        
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Compile dependencies -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
     </dependencies>
     
     <distributionManagement>
-        <!-- distribution management as defined previously -->
+        <repository>
+            <id>nexus</id>
+            <name>Mithun Technologies Releases Nexus Repository</name>
+            <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</url>
+        </repository>
+        
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Mithun Technologies Snapshot Nexus Repository</name>
+            <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url>
+        </snapshotRepository>
     </distributionManagement>
     
     <build>

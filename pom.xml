@@ -1,15 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>com.mt</groupId>
-    <artifactId>maven-web-application</artifactId>
+    <artifactId>maven-web-application -${maven.build.timestamp}</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     
     <name>maven-web-application</name>
+
     <description>Maven Web Project for Java Project</description>
+
     <organization>
         <name>Mithun Technologies</name>
         <url>http://mithuntechnologies.com/</url>
@@ -24,8 +25,7 @@
         <sonar.login>squ_02e108e69a4ce9cf437350c4bb0d76d7480ebf82</sonar.login>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
-        <build.number>unknown</build.number>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -35,7 +35,7 @@
             <version>20160212</version>
         </dependency>
         
-        <!-- Test dependencies -->
+        <!-- test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -57,7 +57,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Compile dependencies -->
+        <!-- compile dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -78,44 +78,42 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        
+        <!-- provided dependencies -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     
     <distributionManagement>
         <repository>
-            <id>nexus-release</id>
+            <id>nexus</id>
             <name>Mithun Technologies Releases Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</url>
         </repository>
         
         <snapshotRepository>
-            <id>nexus-snapshot</id>
+            <id>nexus</id>
             <name>Mithun Technologies Snapshot Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
     
     <build>
-        <finalName>${project.artifactId}-${maven.build.timestamp}-${build.number}</finalName>
+        <finalName>maven-web-application</finalName>
         
         <plugins>
-            <!-- Build Number Plugin -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>create-build-number</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                        <configuration>
-                            <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
-                            <buildNumber>${build.number}</buildNumber>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
             </plugin>
 
             <plugin>

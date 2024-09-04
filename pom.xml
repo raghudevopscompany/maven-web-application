@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -25,9 +26,8 @@
         <sonar.password>passw0rd</sonar.password>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <build.date>${maven.build.timestamp}</build.date>
-        <build.number>unknown</build.number>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
+        <build.number>unknown</build.number>
     </properties>
 
     <dependencies>
@@ -36,7 +36,6 @@
             <artifactId>json</artifactId>
             <version>20160212</version>
         </dependency>
-
         <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -44,21 +43,18 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Compile dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -84,21 +80,41 @@
 
     <distributionManagement>
         <repository>
-            <id>nexus</id>
+            <id>nexus-release</id>
             <name>Mithun Technologies Releases Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</url>
         </repository>
         <snapshotRepository>
-            <id>nexus</id>
+            <id>nexus-snapshot</id>
             <name>Mithun Technologies Snapshot Nexus Repository</name>
             <url>http://172.31.31.37:8081/repository/jenkins-maven-nexus-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
 
     <build>
-        <finalName>${project.artifactId}-${build.date}-${build.number}</finalName>
+        <finalName>${project.artifactId}-${maven.build.timestamp}-${build.number}</finalName>
 
         <plugins>
+            <!-- Build Helper Plugin to add timestamp -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>add-timestamp-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp</goal>
+                        </goals>
+                        <configuration>
+                            <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
+                            <timestampProperty>maven.build.timestamp</timestampProperty>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Build Number Plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -114,26 +130,6 @@
                         <configuration>
                             <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
                             <buildNumber>${build.number}</buildNumber>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Maven Build Timestamp Plugin -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <id>add-timestamp-property</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>timestamp</goal>
-                        </goals>
-                        <configuration>
-                            <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
-                            <timestampProperty>maven.build.timestamp</timestampProperty>
                         </configuration>
                     </execution>
                 </executions>
@@ -163,11 +159,14 @@
                 </configuration>
             </plugin>
 
-            <!-- Eclipse Plugin -->
+            <!-- Deploy Plugin -->
             <plugin>
-                <groupId>org.eclipse</groupId>
-                <artifactId>m2e-core</artifactId>
-                <version>1.20.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.0-M1</version>
+                <configuration>
+                    <altDeploymentRepository>nexus-releases::default::http://172.31.31.37:8081/repository/jenkins-maven-nexus-release/</altDeploymentRepository>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -26,8 +26,6 @@
         <sonar.password>passw0rd</sonar.password>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <build.timestamp>${build.timestamp}</build.timestamp>
-        <build.number>${build.number}</build.number>
     </properties>
 
     <dependencies>
@@ -102,7 +100,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
@@ -113,7 +111,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.11.v20150529</version>
+                <version>9.4.44.v20210927</version>
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
@@ -124,15 +122,9 @@
 
             <!-- Eclipse Plugin -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>2.0</wtpversion>
-                    <wtpContextName>maven-web-application</wtpContextName>
-                </configuration>
+                <groupId>org.eclipse</groupId>
+                <artifactId>m2e-core</artifactId>
+                <version>1.18.1</version>
             </plugin>
 
             <!-- Build Number Plugin -->
@@ -150,7 +142,6 @@
                         <configuration>
                             <timestampFormat>yyyyMMdd</timestampFormat>
                             <buildNumberProperty>build.number</buildNumberProperty>
-                            <!-- Only include the build number if supported -->
                         </configuration>
                     </execution>
                 </executions>

@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     
-    <name>maven-web-application</name>
+    <name>maven-project</name>
 
     <description>Maven Web Project for Java Project</description>
 
@@ -25,67 +25,12 @@
         <sonar.login>squ_02e108e69a4ce9cf437350c4bb0d76d7480ebf82</sonar.login>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+        <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format> <!-- Updated format to avoid colons in filename -->
+        <build.timestamp>${maven.build.timestamp.format}</build.timestamp>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160212</version>
-        </dependency>
-        
-        <!-- test dependencies -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>1.9.5</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- compile dependencies -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        
-        <!-- provided dependencies -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
+        <!-- Dependencies here -->
     </dependencies>
     
     <distributionManagement>
@@ -103,7 +48,7 @@
     </distributionManagement>
     
     <build>
-        <finalName>maven-web-application</finalName>
+        <finalName>${project.artifactId}-${project.version}-${build.timestamp}</finalName>
         
         <plugins>
             <plugin>
@@ -139,6 +84,8 @@
                     <wtpContextName>maven-web-application</wtpContextName>
                 </configuration>
             </plugin>
+
+            <!-- Optionally add maven-assembly-plugin or other plugins if needed -->
         </plugins>
     </build>
 </project>

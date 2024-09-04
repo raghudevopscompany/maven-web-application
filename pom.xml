@@ -25,6 +25,9 @@
         <sonar.password>passw0rd</sonar.password>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <build.date>${maven.build.timestamp}</build.date>
+        <build.number>unknown</build.number>
+        <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -93,9 +96,49 @@
     </distributionManagement>
 
     <build>
-        <finalName>maven-web-application</finalName>
+        <finalName>${project.artifactId}-${build.date}-${build.number}</finalName>
 
         <plugins>
+            <!-- Build Number Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>create-build-number</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                        <configuration>
+                            <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
+                            <buildNumber>${build.number}</buildNumber>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Build Timestamp Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>add-timestamp-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp</goal>
+                        </goals>
+                        <configuration>
+                            <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
+                            <timestampProperty>maven.build.timestamp</timestampProperty>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     
-    <name>maven-project</name>
+    <name>maven-web-application</name>
 
     <description>Maven Web Project for Java Project</description>
 
@@ -25,7 +25,7 @@
         <sonar.login>squ_02e108e69a4ce9cf437350c4bb0d76d7480ebf82</sonar.login>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd-HHmmss</maven.build.timestamp.format> <!-- Updated format to avoid colons in filenames -->
+        <build.timestamp.format>yyyy-MM-dd-HHmmss</build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -48,22 +48,20 @@
     
     <build>
         <plugins>
-            <!-- Plugin to generate the timestamp -->
+            <!-- Plugin to generate build number and timestamp -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.2.0</version>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
                 <executions>
                     <execution>
-                        <id>add-property</id>
+                        <id>create-build-number</id>
                         <phase>initialize</phase>
                         <goals>
-                            <goal>timestamp</goal>
+                            <goal>create</goal>
                         </goals>
                         <configuration>
-                            <format>${maven.build.timestamp.format}</format>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <outputFile>timestamp.txt</outputFile>
+                            <timestampFormat>${build.timestamp.format}</timestampFormat>
                         </configuration>
                     </execution>
                 </executions>
@@ -102,11 +100,8 @@
                     <wtpContextName>maven-web-application</wtpContextName>
                 </configuration>
             </plugin>
-
-            <!-- Additional plugins can be added here -->
         </plugins>
         
-        <!-- Use the build-helper-maven-plugin to update the final name dynamically -->
-        <finalName>${project.artifactId}-${project.version}-${build.timestamp}</finalName>
+        <finalName>${project.artifactId}-${project.version}-${buildNumber}</finalName>
     </build>
 </project>
